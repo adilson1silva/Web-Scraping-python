@@ -1,0 +1,30 @@
+
+      
+                   data science
+-------------------------------------------------------
+ - Python no Machine Learning
+ - Python para visualização de dados e análise de dados
+
+-------------------------------------------------------
+-------------------------------------------------------
+
+            Python para desenvolvimento Web
+-------------------------------------------------------
+-------------------------------------------------------
+       Python para desenvolvimento de aplicativos
+-------------------------------------------------------
+-------------------------------------------------------
+          Python para automação de Scripts
+-------------------------------------------------------
+-------------------------------------------------------
+
+Desenvolvimento de jogos
+Aplicações GUI
+Networking
+Testing
+Robotics
+Embedded applications (Python funciona com o Raspberry Pi)
+
+diferença entre 
+ - Data analise 
+ - Data science
