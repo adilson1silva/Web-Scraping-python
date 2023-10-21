@@ -9,7 +9,7 @@ driver.get("http://www.python.org") # driver.get - Serve para navegar até a pá
 
 assert "Python" in driver.title # esta linha serve para confirmar se "Python" é o titulo da página
                                 
-elem = driver.find_element(By.NAME, "q") # rpocurar elementos atraves de nomes
+elem = driver.find_element(By.NAME, "q") # procurar elementos atraves de nomes
 
 elem.clear() # antes de tudo começar a limpar, para ter uma garantia de que não vai ter dados para atrapalhar
 elem.send_keys("pycon")
