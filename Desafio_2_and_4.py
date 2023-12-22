@@ -1,15 +1,28 @@
 """
-Descrição do problema
+Description:
+This is an automation challenge with Python (selenium) and also webscraping (BeautifulSoup).
+The challenge contains some points to complete: 
+- Enter the website "https://www.leyaonline.com/pt/"
+- Search for the book "1984"
+- Validate that the Author is "George Orwell"
+- Confirm that the ISBN is "9789722071550"
+- Check that the ebook has 344 pages
+- Verify that the ebook has the following dimensions "235 x 157 x 23mm"
 
-- Entre no site "https://www.leyaonline.com/pt/"
-- Procura pelo livro "1984"
-- valida que o Autor é "George Orwell"
-- Confirma que o ISBN é "9789722071550"
-- Verifique que o ebook tem 344 páginas
-- Certifica que o ebook tem as seguintes dimenção "235*157*23mm"
+challenge 4
+ - earch for the book "1984."
+ - Add the book to the basket.
+ - Confirm that the number of items in the basket is "1."
+
+
+Return: 
+ Answers with the correct information from the challenge.
+
+Code created by:
+Adilson Silva
 """
 
-#importar bibliotecas 
+#Importar bibliotecas 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -18,9 +31,10 @@ import requests
 import re
 from time import sleep
 
-#dicionario
+#Dicionario
 dados_completo = {}
-# Listas
+
+#Listas
 lista_titulo = []
 autor_ebook = []
 descrição = []
@@ -31,7 +45,7 @@ nome_autor = "George Orwell"
 isbn_desejado = '9789722071550'
 paginas_desejadas = '344'
 
-# Abrir o Browser (Chrome)
+#Abrir o Browser (Chrome)
 drive = webdriver.Chrome()
 url = 'https://www.leyaonline.com/pt/'
 drive.get(url)
@@ -40,7 +54,7 @@ drive.maximize_window()
 #Aceitar os termos 
 aceitar = drive.find_element(By.XPATH, '//*[@id="cookiescript_accept"]').click()
 
-# encontrar o elemento da barra de pesquisa e pesquisar por "1984"
+#Encontrar o elemento da barra de pesquisa e pesquisar por "1984"
 search = drive.find_element(By.XPATH, '//*[@id="searchbar-large"]')
 search.click()
 search.send_keys(nome_ebook)
@@ -55,7 +69,7 @@ soup = BeautifulSoup(res.text, 'html.parser')
 
 elements = soup.find_all('a', class_ = 'second')
 
-#print(elements)
+#Print(elements)
 for element in elements:
     element_author = element.find('div', class_ = 'book-author').text.strip()
     if element_author == 'GEORGE ORWELL':
@@ -69,7 +83,7 @@ print(f'\033[032m{lista_titulo}\033[m')
 print(f'\033[032m{descrição}\033[m')
 
 
-#confirmar dados finais
+#Confirmar dados finais
 lista_final  = []
 for c in range(0, len(descrição)):
     print(f'\033[033m URL a ser analizada - {descrição[c]} \033[m')
@@ -80,16 +94,16 @@ for c in range(0, len(descrição)):
     detalhes = soup.find('div', class_ = '_sinpose-address').ul.text.strip()
     
     lista_final.append(detalhes)
-    #print (f'\033[032m{lista_final}\033[m')
+    #Print (f'\033[032m{lista_final}\033[m')
 
     padrao_isbn = r'ISBN: (\d+)'
     padrao_paginas = r'Páginas: (\d+)'
 
-    # Variáveis para armazenar os resultados
+    #Variáveis para armazenar os resultados
     isbn_encontrado = None
     paginas_encontradas = None
 
-    # Iterar sobre a lista e procurar os padrões
+    #Iterar sobre a lista e procurar os padrões
     for item in lista_final:
         match_isbn = re.search(padrao_isbn, item)
         match_paginas = re.search(padrao_paginas, item)
@@ -100,7 +114,7 @@ for c in range(0, len(descrição)):
         if match_paginas:
             paginas_encontradas = match_paginas.group(1)
 
-    # Comparar com os valores desejados
+    #Comparar com os valores desejados
     if isbn_encontrado == isbn_desejado:
         print(f"\033[032mO ISBN encontrado: {isbn_encontrado} é igual ao ISBN desejado.\033[m")
     else:
@@ -111,7 +125,7 @@ for c in range(0, len(descrição)):
 
         #Desafio 4
         comprar = drive.find_element(By.XPATH, '//*[@id="pjax-container"]/section[1]/div/div[1]/div[2]/div/div[4]/div/div[2]/div/a').click()
-        #Confirm that the number of items in the basket is "1."
+        #Conformar que o número no carinho é "1"
         sleep(10)
         new_page_source = drive.page_source
         soup = BeautifulSoup(new_page_source, 'html.parser')
@@ -122,7 +136,6 @@ for c in range(0, len(descrição)):
     else:
         print(f"\033[031mO número de páginas encontrado: {paginas_encontradas} é diferente ao número de páginas desejado.\033[m")
 
-    
 print('Volte sempre')
     
     

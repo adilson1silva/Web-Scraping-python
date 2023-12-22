@@ -1,3 +1,16 @@
+"""
+this is a shorter challenge that contains the following points and will be completed: 
+Change the background to dark mode.
+Check that dark mode has been successfully applied to the website.
+
+ Return:
+ - return the answer according to the challenge
+
+ Code created by:
+  - Adilson Silva
+"""
+
+#importar bibliotecas
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys

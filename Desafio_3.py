@@ -1,4 +1,19 @@
-#importar bibliotecas 
+"""
+Description:
+This is an automation challenge with Python (selenium) and also webscraping (BeautifulSoup).
+ The challenge contains some points to complete: 
+ - Search for the book "1984".
+ - Check if the book "Animal Farm" is by the same author.
+
+ Return:
+ - return the answer according to the challenge
+
+ Code created by:
+  - Adilson Silva
+
+"""
+
+#Importar bibliotecas 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -19,7 +34,7 @@ nome_ebook = "1984"
 nome_autor = "George Orwell"
 nome_ebook_2 = "A Quinta dos Animais"
 
-# Abrir o Browser (Chrome)
+#Abrir o Browser (Chrome)
 drive = webdriver.Chrome()
 url = 'https://www.leyaonline.com/pt/'
 drive.get(url)
@@ -28,7 +43,7 @@ drive.maximize_window()
 #Aceitar os termos 
 aceitar = drive.find_element(By.XPATH, '//*[@id="cookiescript_accept"]').click()
 
-# encontrar o elemento da barra de pesquisa e pesquisar por "1984"
+#Encontrar o elemento da barra de pesquisa e pesquisar por "1984"
 search = drive.find_element(By.XPATH, '//*[@id="searchbar-large"]')
 search.click()
 search.send_keys(nome_ebook)
@@ -43,7 +58,7 @@ soup = BeautifulSoup(res.text, 'html.parser')
 
 elements = soup.find_all('a', class_ = 'second')
 
-#print(elements)
+#Print(elements)
 for element in elements:
     element_author = element.find('div', class_ = 'book-author').text.strip()
     if element_author == 'GEORGE ORWELL':
@@ -52,11 +67,6 @@ for element in elements:
         lista_titulo.append(element_name)
         link = element.get('href')
         descrição.append(link)
-####
-####
-####
-####
-####
 
 search = drive.find_element(By.XPATH, '//*[@id="searchbar-large"]')
 search.click()
@@ -72,7 +82,7 @@ soup = BeautifulSoup(res.text, 'html.parser')
 
 elements = soup.find_all('a', class_ = 'second')
 
-#print(elements)
+#Print(elements)
 for element in elements:
     element_author = element.find('div', class_ = 'book-author').text.strip()
     if element_author == 'GEORGE ORWELL':
