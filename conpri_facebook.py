@@ -23,14 +23,14 @@ if num == 0 or num == 1:
     #email
     keyboard.press_and_release('tab')
     sleep(3)
-    keyboard.write('Kapacidade265@gmail.com')
+    keyboard.write('email')
 
 
 
     sleep(2)
     #pass
     keyboard.press_and_release('tab')
-    keyboard.write('kapacidade')
+    keyboard.write('pass')
     sleep(2)
     #enter
     entrar = driver.find_element(By.NAME, 'login').click()
